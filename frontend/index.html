@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AESA Helpdesk - Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="login-wrapper">
+        <div class="card login-card">
+            <div class="login-header">
+                <img src="logo.png" alt="Aesa Logo" style="max-height: 80px; margin-bottom: 1rem;">
+                <h1>AESA Helpdesk</h1>
+                <p>Acesse o sistema de chamados</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" placeholder="Digite seu usuário" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" required>
+                </div>
+
+                <div id="errorMessage" class="hidden"
+                    style="color: var(--danger); font-size: 0.875rem; margin-bottom: 1rem; text-align: center;"></div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+            </form>
+
+            <div style="margin-top: 1.5rem; text-align: center; font-size: 0.875rem;">
+                <p>Ainda não tem conta (Testes)? <a href="#" id="toggleRegister">Criar Conta Temporária</a></p>
+            </div>
+
+            <form id="registerForm" class="hidden"
+                style="margin-top:1rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                <h3 style="margin-bottom: 1rem; font-size: 1rem;">Registro Rápido</h3>
+                <div class="form-group">
+                    <label for="regUsername">Usuário</label>
+                    <input type="text" id="regUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Senha</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="regRole">Papel (Role)</label>
+                    <select id="regRole">
+                        <option value="user">Usuário Comum</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-secondary" style="width: 100%;">Registrar</button>
+                <div id="regMessage" style="font-size: 0.875rem; margin-top: 0.5rem; text-align: center;"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

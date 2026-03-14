@@ -1,0 +1,209 @@
+/* Modern Styling for the Helpdesk System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #22B2A7; /* Teal from AESA logo */
+  --primary-hover: #1b8f86;
+  --secondary: #514F59; /* Dark grey from AESA logo */
+  --bg-color: #F3F4F6;
+  --card-bg: #FFFFFF;
+  --text-main: #111827;
+  --text-muted: #6B7280;
+  --border-color: #E5E7EB;
+  --danger: #EF4444;
+  --warning: #F59E0B;
+  --radius: 8px;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography and common elements */
+h1, h2, h3 { font-weight: 600; color: var(--text-main); }
+p { color: var(--text-muted); line-height: 1.5; }
+a { color: var(--primary); text-decoration: none; transition: 0.2s; }
+a:hover { color: var(--primary-hover); }
+
+/* Layouts */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Forms and Inputs */
+.form-group { margin-bottom: 1.5rem; }
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  background-color: var(--secondary);
+  color: white;
+}
+.btn-danger { background-color: var(--danger); color: white; }
+.btn-danger:hover { background-color: #DC2626; }
+
+/* Cards */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+}
+
+/* Login Page specific */
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+.login-card {
+  width: 100%;
+  max-width: 400px;
+}
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Navbar */
+.navbar {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Tables */
+.table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+th, td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+th {
+  background-color: #F9FAFB;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+tr:hover { background-color: #F9FAFB; }
+
+/* Status Badges */
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.badge-aberto { background-color: #DBEAFE; color: #1E40AF; }
+.badge-em_analise { background-color: #FEF3C7; color: #B45309; }
+.badge-respondido { background-color: #E0E7FF; color: #4338CA; }
+.badge-concluido { background-color: #D1FAE5; color: #065F46; }
+
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: fadeIn 0.2s ease-out;
+}
+.modal.active { display: flex; }
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 500px;
+  animation: slideUp 0.3s ease-out;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.close-btn { cursor: pointer; font-size: 1.5rem; color: var(--text-muted); }
+
+/* Utilities */
+.hidden { display: none !important; }
+.mb-4 { margin-bottom: 1rem; }
+.mt-4 { margin-top: 1rem; }
+.flex { display: flex; }
+.justify-between { justify-content: space-between; }
+.items-center { align-items: center; }
+.gap-2 { gap: 0.5rem; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }

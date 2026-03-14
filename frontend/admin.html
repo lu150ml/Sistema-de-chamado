@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - AESA Helpdesk</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="flex items-center gap-2">
+            <img src="logo.png" alt="Aesa Logo" style="max-height: 40px;">
+            <span class="badge badge-em_analise">Painel Administrativo</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <span id="userNameDisplay">Olá, Admin</span>
+            <button id="exportReportBtn" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Exportar p/ BI
+                (CSV)</button>
+            <button id="logoutBtn" class="btn btn-danger" style="padding: 0.5rem 1rem;">Sair</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="flex justify-between items-center mb-4">
+            <h2>Gestão de Todos os Chamados</h2>
+        </div>
+
+        <div class="card">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Criador</th>
+                            <th>Título</th>
+                            <th>Fila Atual</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTicketsBody">
+                        <!-- Tickets rendered dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Chamado -->
+    <div id="editTicketModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Gerenciar Chamado #<span id="editTicketIdSpan"></span></h2>
+                <span class="close-btn" id="closeEditTicketModal">&times;</span>
+            </div>
+            <form id="editTicketForm">
+                <input type="hidden" id="editTicketId">
+                <div class="form-group mb-4">
+                    <p><strong>Descrição Original:</strong></p>
+                    <div id="editTicketOriginalDesc"
+                        style="background:#F3F4F6; padding:1rem; border-radius:4px; margin-top:0.5rem; font-size:0.875rem;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editStatus">Status</label>
+                    <select id="editStatus">
+                        <option value="aberto">Aberto</option>
+                        <option value="em_analise">Em Análise</option>
+                        <option value="respondido">Respondido</option>
+                        <option value="concluido">Concluído</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editQueue">Mover Fila para:</label>
+                    <select id="editQueue">
+                        <option value="Suporte N1">Suporte N1</option>
+                        <option value="Suporte N2">Suporte N2</option>
+                        <option value="Suporte N3">Suporte N3 (Especialistas)</option>
+                        <option value="Financeiro">Financeiro</option>
+                        <option value="Operações">Operações</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editNotes">Responder / Anotações de Resolução</label>
+                    <textarea id="editNotes" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Check auth on load for Admin page
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            const role = localStorage.getItem('role');
+            if (!token || role !== 'admin') {
+                window.location.href = 'index.html';
+            }
+            document.getElementById('userNameDisplay').textContent = `Olá, ${localStorage.getItem('username')}`;
+            loadAdminTickets();
+        });
+    </script>
+</body>
+
+</html>

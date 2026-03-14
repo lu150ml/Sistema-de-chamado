@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Dashboard - BI Helpdesk</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="flex items-center gap-2">
+            <img src="logo.png" alt="Aesa Logo" style="max-height: 40px;">
+            <span class="badge badge-aberto">Área do Usuário</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <span id="userNameDisplay">Olá, Usuário</span>
+            <button id="logoutBtn" class="btn btn-danger" style="padding: 0.5rem 1rem;">Sair</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="flex justify-between items-center mb-4">
+            <h2>Meus Chamados</h2>
+            <button id="openNewTicketModal" class="btn btn-primary">+ Novo Chamado</button>
+        </div>
+
+        <div class="card">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Status</th>
+                            <th>Fila</th>
+                            <th>Data Criação</th>
+                            <th>Notas / Resposta</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTicketsBody">
+                        <!-- Tickets rendered dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Novo Chamado -->
+    <div id="newTicketModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Abrir Novo Chamado</h2>
+                <span class="close-btn" id="closeNewTicketModal">&times;</span>
+            </div>
+            <form id="newTicketForm">
+                <div class="form-group">
+                    <label for="ticketTitle">Título / Assunto</label>
+                    <input type="text" id="ticketTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="ticketDesc">Descrição do Problema</label>
+                    <textarea id="ticketDesc" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Chamado</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Check auth on load for User page
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            const role = localStorage.getItem('role');
+            if(!token || role !== 'user') {
+                window.location.href = 'index.html';
+            }
+            document.getElementById('userNameDisplay').textContent = `Olá, ${localStorage.getItem('username')}`;
+            loadUserTickets();
+        });
+    </script>
+</body>
+</html>
