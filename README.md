@@ -55,12 +55,22 @@ node seed.js
 ```
 *Isso criará uma base pronta com os usuários: `admin_master` (Senha: senha123) e `joao_silva` (Senha: senha123).*
 
-### 3. Iniciando o Servidor
+### 3. Gerenciando o Servidor
+
+#### ▶️ Como Iniciar:
 Com o banco configurado, inicie a aplicação:
 ```bash
 node server.js
 ```
 O console deverá exibir a mensagem: `Server is running on port 3000`.
+
+#### ⏸️ Como Parar (Encerrar):
+Para desligar o servidor quando não estiver mais usando:
+1. Volte na mesma janela do terminal onde ele está rodando.
+2. Pressione as teclas **`Ctrl + C`** juntas.
+3. Se perguntar "Deseja finalizar o arquivo em lotes (S/N)?", digite `S` e dê Enter.
+
+*Dica: Se por acaso você fechar a aba do terminal sem desligar e a porta 3000 ficar "presa" rodando de fundo, você pode matar o processo rodando o comando: `npx kill-port 3000`.*
 
 ### 4. Acessando a Interface
 Abra em seu navegador preferido:
