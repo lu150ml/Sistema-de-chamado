@@ -46,8 +46,8 @@ router.put('/tickets/:id', verifyToken, verifyAdmin, (req, res) => {
     const { status, queue, resolution_notes } = req.body;
     const ticketId = req.params.id;
 
-    // SLA: set started_at only if transitioning to em_analise for the first time
-    const startedAtSql = (status === 'em_analise')
+    // SLA: set started_at if transitioning to em_analise OR if skipping directly to respondido/concluido
+    const startedAtSql = (status === 'em_analise' || status === 'respondido' || status === 'concluido')
         ? `, started_at = COALESCE(started_at, CURRENT_TIMESTAMP)`
         : '';
 

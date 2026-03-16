@@ -216,13 +216,14 @@ async function loadUserTickets() {
         tbody.innerHTML = '';
         data.forEach(t => {
             const tr = document.createElement('tr');
+            const slaTo = t.responded_at || t.started_at;
             tr.innerHTML = `
                 <td>#${t.id}</td>
                 <td><strong>${t.title}</strong></td>
                 <td>${getStatusBadge(t.status)}</td>
                 <td>${t.queue}</td>
                 <td>${formatDate(t.created_at)}</td>
-                <td class="sla-col">${getSLAChip(t.created_at, t.started_at, '⏳ Aguardando')}</td>
+                <td class="sla-col">${getSLAChip(t.created_at, slaTo, '⏳ Aguardando')}</td>
                 <td style="max-width:300px">
                     <div style="font-size:0.875rem; margin-bottom:4px"><strong>Sua desc:</strong> ${t.description}</div>
                     ${t.resolution_notes
@@ -300,13 +301,14 @@ function renderAdminTickets(tickets) {
     tbody.innerHTML = '';
     tickets.forEach(t => {
         const tr = document.createElement('tr');
+        const slaTo = t.responded_at || t.started_at;
         tr.innerHTML = `
             <td>#${t.id}</td>
             <td>${t.creator}</td>
             <td><strong>${t.title}</strong></td>
             <td>${t.queue}</td>
             <td>${getStatusBadge(t.status)}</td>
-            <td class="sla-col">${getSLAChip(t.created_at, t.started_at, '⏳ Pendente')}</td>
+            <td class="sla-col">${getSLAChip(t.created_at, slaTo, '⏳ Pendente')}</td>
             <td>
                 <button class="btn btn-secondary" style="padding:0.25rem 0.75rem; font-size:0.875rem;" onclick="openEditModal(${t.id})">Analisar</button>
             </td>
