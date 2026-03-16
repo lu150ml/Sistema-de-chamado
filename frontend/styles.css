@@ -174,10 +174,12 @@ tr:hover { background-color: #F9FAFB; }
   position: fixed;
   inset: 0;
   background-color: rgba(0,0,0,0.5);
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 50;
   animation: fadeIn 0.2s ease-out;
+  padding: 2rem 1rem;
+  overflow-y: auto;
 }
 .modal.active { display: flex; }
 .modal-content {
@@ -185,8 +187,9 @@ tr:hover { background-color: #F9FAFB; }
   padding: 2rem;
   border-radius: var(--radius);
   width: 100%;
-  max-width: 500px;
+  max-width: 540px;
   animation: slideUp 0.3s ease-out;
+  margin: auto;
 }
 .modal-header {
   display: flex;
