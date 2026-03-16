@@ -38,6 +38,7 @@
                             <th>Título</th>
                             <th>Fila Atual</th>
                             <th>Status</th>
+                            <th>SLA Início</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -58,6 +59,10 @@
             </div>
             <form id="editTicketForm">
                 <input type="hidden" id="editTicketId">
+
+                <!-- SLA Timeline -->
+                <div id="slaTimelineContainer"></div>
+
                 <div class="form-group mb-4">
                     <p><strong>Descrição Original:</strong></p>
                     <div id="editTicketOriginalDesc"

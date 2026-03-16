@@ -30,9 +30,14 @@ const db = new sqlite3.Database(dbPath, (err) => {
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             resolution_notes TEXT,
+            started_at DATETIME,
+            responded_at DATETIME,
             FOREIGN KEY (user_id) REFERENCES users(id)
         )`, (err) => {
              if (err) console.error("Error creating tickets table", err);
+             // Migrate existing databases: add SLA columns if they don't exist
+             db.run(`ALTER TABLE tickets ADD COLUMN started_at DATETIME`, () => {});
+             db.run(`ALTER TABLE tickets ADD COLUMN responded_at DATETIME`, () => {});
         });
     }
 });

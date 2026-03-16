@@ -207,3 +207,94 @@ tr:hover { background-color: #F9FAFB; }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* ───── SLA Timeline ───── */
+.sla-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #F8FAFC;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.sla-timeline-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.sla-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.sla-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  width: 2px;
+  height: calc(100% + 4px);
+  background: var(--border-color);
+}
+
+.sla-step-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.sla-step-icon.done { background-color: #D1FAE5; color: #065F46; }
+.sla-step-icon.pending { background-color: #F3F4F6; color: var(--text-muted); }
+.sla-step-icon.active { background-color: #FEF3C7; color: #B45309; }
+
+.sla-step-body {
+  padding-bottom: 1rem;
+  flex: 1;
+}
+
+.sla-step-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.sla-step-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* SLA chip shown in tables */
+.sla-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sla-chip.ok   { background: #D1FAE5; color: #065F46; }
+.sla-chip.warn { background: #FEF3C7; color: #B45309; }
+.sla-chip.over { background: #FEE2E2; color: #991B1B; }
+.sla-chip.none { background: #F3F4F6; color: var(--text-muted); }
+
+/* SLA column in admin table */
+.sla-col { min-width: 130px; }

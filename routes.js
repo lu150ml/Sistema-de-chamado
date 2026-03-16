@@ -29,7 +29,8 @@ router.get('/tickets/my', verifyToken, (req, res) => {
 // Get All Tickets
 router.get('/tickets', verifyToken, verifyAdmin, (req, res) => {
     const sql = `
-        SELECT t.*, u.username as creator 
+        SELECT t.*, u.username as creator,
+               t.started_at, t.responded_at
         FROM tickets t 
         JOIN users u ON t.user_id = u.id 
         ORDER BY t.created_at DESC
@@ -45,8 +46,23 @@ router.put('/tickets/:id', verifyToken, verifyAdmin, (req, res) => {
     const { status, queue, resolution_notes } = req.body;
     const ticketId = req.params.id;
 
-    const sql = `UPDATE tickets SET status = COALESCE(?, status), queue = COALESCE(?, queue), 
-                 resolution_notes = COALESCE(?, resolution_notes), updated_at = CURRENT_TIMESTAMP 
+    // SLA: set started_at only if transitioning to em_analise for the first time
+    const startedAtSql = (status === 'em_analise')
+        ? `, started_at = COALESCE(started_at, CURRENT_TIMESTAMP)`
+        : '';
+
+    // SLA: set responded_at only if transitioning to respondido/concluido for the first time
+    const respondedAtSql = (status === 'respondido' || status === 'concluido')
+        ? `, responded_at = COALESCE(responded_at, CURRENT_TIMESTAMP)`
+        : '';
+
+    const sql = `UPDATE tickets 
+                 SET status = COALESCE(?, status), 
+                     queue = COALESCE(?, queue), 
+                     resolution_notes = COALESCE(?, resolution_notes), 
+                     updated_at = CURRENT_TIMESTAMP
+                     ${startedAtSql}
+                     ${respondedAtSql}
                  WHERE id = ?`;
 
     db.run(sql, [status, queue, resolution_notes, ticketId], function(err) {
