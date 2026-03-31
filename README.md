@@ -1,4 +1,4 @@
-# AESA Helpdesk - Sistema de Chamados com suporte a BI
+# Helpdesk - Sistema de Chamados com suporte a BI
 
 Este é um sistema de Helpdesk construído com foco em simplicidade, design moderno e facilidade de extração de dados para relatórios de Business Intelligence (BI).
 
